@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/white"
+    tools:context=".Activities.LoginAct">
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="350dp"
+        android:background="#3F3F3F"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:layout_gravity="center"
+            android:src="@drawable/calendardua"
+            android:layout_width="match_parent"
+            android:layout_height="64dp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="600dp"
+        android:layout_marginBottom="100dp"
+        android:background="@drawable/bg_white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout">
+
+        <TextView
+            android:gravity="center"
+            android:textSize="26dp"
+            android:layout_marginTop="30dp"
+            android:fontFamily="@font/nunito_semibold"
+            android:textColor="@color/black"
+            android:text="Login"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <LinearLayout
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:orientation="vertical"
+            android:layout_width="270dp"
+            android:layout_height="200dp">
+
+            <LinearLayout
+                android:id="@+id/linearEmail"
+                android:orientation="vertical"
+                android:layout_width="270dp"
+                android:layout_height="65dp"
+                android:background="#FCFCFC">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="5dp"
+                    android:fontFamily="@font/nunito"
+                    android:text="NIP"
+                    android:textColor="@color/black"
+                    android:textSize="14dp" />
+
+                <EditText
+                    android:id="@+id/nipLogin"
+                    android:inputType="text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linearPass"
+                android:layout_marginTop="30dp"
+                android:orientation="vertical"
+                android:layout_width="270dp"
+                android:layout_height="65dp"
+                android:background="#FCFCFC">
+
+                <TextView
+                    android:fontFamily="@font/nunito"
+                    android:textColor="@color/black"
+                    android:textSize="14dp"
+                    android:text="Password"
+                    android:layout_marginLeft="5dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <EditText
+                    android:id="@+id/passLogin"
+                    android:inputType="textPassword"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/signIn"
+            android:background="@drawable/bg_black"
+            android:layout_gravity="center"
+            android:layout_width="270dp"
+            android:layout_height="60dp">
+
+            <TextView
+                android:fontFamily="@font/nunito_semibold"
+                android:textSize="18dp"
+                android:textColor="@color/white"
+                android:text="Login"
+                android:gravity="center"
+                android:layout_gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+       <!-- <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/toReg"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/nunito_bold"
+                android:gravity="center"
+                android:text="Dont Have Any Account ? Sign Up"
+                android:textColor="@color/black" />
+
+        </LinearLayout> !-->
+
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

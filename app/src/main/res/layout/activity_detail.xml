@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Activities.DetailAct">
+
+    <LinearLayout
+        android:id="@+id/layoutSatu"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/nameUserDetail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Region III"
+                android:fontFamily="@font/nunito"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/relativeSatu"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+
+            >
+
+            <LinearLayout
+                android:id="@+id/nameLinearDetail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/nameTextViewDetail"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Name : "
+                    android:fontFamily="@font/nunito"
+                    />
+
+                <TextView
+                    android:id="@+id/jenisTextViewDetail"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="AC"
+                    android:textIsSelectable="false"
+                    android:fontFamily="@font/nunito"
+                    />
+            </LinearLayout>
+            <ImageButton
+                android:id="@+id/moreBtnMainDetail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:background="@null"
+                android:src="@drawable/ic_more_black_24dp" />
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/merkLinearDetail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/merkTextDetail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Merk / Type :"
+                android:fontFamily="@font/nunito"
+                />
+
+            <TextView
+                android:id="@+id/merkViewDetail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Panasonic / Casette / CU PV 24RB4P"
+                android:fontFamily="@font/nunito"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/lokasiLinearDetail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/lokasiTextDetail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Lokasi :"
+                android:fontFamily="@font/nunito"
+                />
+
+            <TextView
+                android:id="@+id/lokasiViewDetail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="G.A"
+                android:fontFamily="@font/nunito"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/inventarisLinearDetail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/inventarisTextDetail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="No inventaris : "
+                android:fontFamily="@font/nunito"
+                />
+
+            <TextView
+                android:id="@+id/inventarisViewDetail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="2.5 PK"
+                android:fontFamily="@font/nunito"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/perawatanLinear"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/idPerawatan"
+                android:text="Jangka Waktu Perawatan :"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/nunito"
+                />
+
+            <TextView
+                android:id="@+id/jangkaText"
+                android:text="3 Bulan"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/nunito"
+                />
+        </LinearLayout>
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/layoutTable"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/layoutSatu"
+        android:layout_marginTop="30dp"
+        android:layout_alignParentBottom="true"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/linearTable"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/table_header_cell_bg">
+
+            <TextView
+                android:text="No"
+                android:textSize="12dp"
+                android:layout_gravity="center"
+                android:layout_width="35dp"
+                android:textColor="@color/white"
+                android:gravity="center"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/nunito"
+
+                />
+
+            <TextView
+                android:layout_column="1"
+                android:text="Tanggal\nMaintenance"
+                android:layout_width="85dp"
+                android:textColor="@color/white"
+                android:layout_gravity="center"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/nunito"
+                android:layout_weight="1"
+                android:textSize="12dp" />
+
+            <TextView
+                android:layout_column="1"
+                android:text="Tanggal\nMaintenance\nSelanjutnya"
+                android:fontFamily="@font/nunito"
+                android:layout_width="85dp"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:layout_weight="1"
+                android:textSize="11dp" />
+
+            <TextView
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_column="1"
+                android:layout_gravity="center"
+                android:fontFamily="@font/nunito"
+                android:layout_weight="1"
+                android:textColor="@color/white"
+                android:text="Tindakan"
+                android:textSize="12dp" />
+            <TextView
+                android:text="Keterangan"
+                android:textSize="12dp"
+                android:textColor="@color/white"
+                android:fontFamily="@font/nunito"
+                android:layout_gravity="center"
+                android:layout_width="75dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_column="1"
+                />
+
+        </LinearLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycleViewDetail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/linearTable"
+            android:layout_marginTop="55dp">
+        </androidx.recyclerview.widget.RecyclerView>
+
+    </RelativeLayout>
+
+</RelativeLayout>

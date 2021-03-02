@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">MaintenanceSql</string>
+
+
+    <string-array name="nama_inventaris">
+        <item>AC</item>
+        <item>Genset</item>
+        <item>Mobil</item>
+        <item>Control Exhaust Fan</item>
+        <item>Pompa</item>
+        <item>Torn</item>
+        <item>Crystal Marmer</item>
+        <item>Pembersihan Gudang</item>
+        <item>Pembersihan Kolam</item>
+        <item>Pembersihan Saluran Air</item>
+        <item>Buffing Lantai</item>
+
+    </string-array>
+</resources>
+

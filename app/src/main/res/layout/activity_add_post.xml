@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".Activities.addPostAct">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+        <LinearLayout
+            android:id="@+id/nameLinear"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/nameTextView"
+                android:text="Name : "
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <Spinner
+                android:id="@+id/jenisEdit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:entries="@array/nama_inventaris"
+                android:padding="15dp"
+                ></Spinner>
+
+            <!--<EditText
+                android:id="@+id/jenisEdit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="AC"
+                android:textIsSelectable="false"/> -->
+        </LinearLayout>
+
+
+
+        <LinearLayout
+            android:id="@+id/merkLinear"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/merkText"
+                android:text="Merk / Type :"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <EditText
+                android:id="@+id/merkEdit"
+                android:hint="Panasonic"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/lokasiLinear"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/lokasiText"
+                android:text="Lokasi :"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <EditText
+                android:id="@+id/lokasiEdit"
+                android:hint="G.A"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/inventarisLinear"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/inventarisText"
+                android:text="No inventaris : "
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <EditText
+                android:id="@+id/inventarisEdit"
+                android:hint="2.5 PK"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <!--<LinearLayout
+            android:id="@+id/dateLinear"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/dateText"
+                android:text="Select Date : "
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <EditText
+                android:id="@+id/dateEdit"
+                android:text="12/10/2020"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout> -->
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:text="Jangka Waktu Pemelihraan :"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <RadioGroup
+                android:id="@+id/radioGrup"
+                android:orientation="horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:ignore="OnClick">
+
+                <RadioButton
+                    android:id="@+id/satuMinggu"
+                    android:text="1 Minggu"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <RadioButton
+                    android:id="@+id/duaMinggu"
+                    android:text="2 Minggu"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <RadioButton
+                    android:id="@+id/satuBulan"
+                    android:text="1 Bulan"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+            </RadioGroup>
+            <RadioGroup
+                android:id="@+id/radioGrupp"
+                android:orientation="horizontal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <RadioButton
+                    android:id="@+id/tigaBulan"
+                    android:text="3 Bulan"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <RadioButton
+                    android:layout_marginLeft="11dp"
+                    android:id="@+id/enamBulan"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="6 Bulan" />
+                <RadioButton
+                    android:id="@+id/satuTahun"
+                    android:layout_marginLeft="13dp"
+                    android:text="12 Bulan"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+            </RadioGroup>
+
+
+            <!--<TextView
+                android:layout_gravity="center"
+                android:layout_marginLeft="10dp"
+                android:textSize="14dp"
+                android:text="(Bulan)"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" /> -->
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/uploadM"
+            android:text="Upload"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"/>
+
+    </LinearLayout>
+
+</LinearLayout>
