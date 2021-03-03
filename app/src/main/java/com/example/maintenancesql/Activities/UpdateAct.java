@@ -2,15 +2,227 @@ package com.example.maintenancesql.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.DatePickerDialog;
+import android.app.ProgressDialog;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.text.TextUtils;
+import android.view.View;
+import android.widget.Button;
+import android.widget.DatePicker;
+import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+import com.example.maintenancesql.Models.Update;
+import com.example.maintenancesql.Models.User;
 import com.example.maintenancesql.R;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
+
 public class UpdateAct extends AppCompatActivity {
+
+    String postId;
+    TextView noText,tanggalText, tindakanText, ketText, tanggalDua;
+
+    EditText tanggalEditDua,noView, tanggalView,tindakanView,ketView;
+
+    Button updateButton;
+
+    ProgressDialog pd;
+    private SharedPreferences preferences;
+
+    Calendar calendar = Calendar.getInstance();
+    Calendar cal = Calendar.getInstance();
+    Date tanggalViewDate,tanggalViewDateTwo;
+    DatePickerDialog.OnDateSetListener setListener, setClickListener;
+    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MMMM-yyyy");
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_update);
+
+        init();
+        Intent intent = getIntent();
+        postId = intent.getStringExtra("postId");
+    }
+
+    private void init() {
+        preferences = getApplicationContext().getSharedPreferences("user",MODE_PRIVATE);
+        noView = findViewById(R.id.noView);
+        tanggalText = findViewById(R.id.tanggalText);
+        tanggalView = findViewById(R.id.tanggalView);
+        tindakanText = findViewById(R.id.tindakanText);
+        tindakanView = findViewById(R.id.tindakanView);
+        ketText = findViewById(R.id.ketText);
+        ketView = findViewById(R.id.ketView);
+        updateButton = findViewById(R.id.updateButton);
+
+        tanggalEditDua = findViewById(R.id.tanggalEditDua);
+        tanggalDua = findViewById(R.id.tanggalDua);
+
+        updateButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String nomor = noView.getText().toString().trim();
+                String tanggal = tanggalView.getText().toString().trim();
+                String tanggalDua = tanggalEditDua.getText().toString();
+                String tindakan = tindakanView.getText().toString().trim();
+                String keterangan = ketView.getText().toString().trim();
+
+                /*String satu = satuBulan.getText().toString().trim();
+                String tiga = tigaBulan.getText().toString().trim();
+                String enam = enamBulan.getText().toString().trim();
+                String Satutahun = satuTahun.getText().toString().trim(); */
+
+                if (TextUtils.isEmpty(nomor)){
+                    Toast.makeText(UpdateAct.this, "Enter No....", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if (TextUtils.isEmpty(tanggal)){
+                    Toast.makeText(UpdateAct.this, "Enter Tanggal ....", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if (TextUtils.isEmpty(tanggalDua)){
+                    Toast.makeText(UpdateAct.this, "Enter Tanggal ....", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if (TextUtils.isEmpty(tindakan)){
+                    Toast.makeText(UpdateAct.this, "Enter Action ....", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                if (TextUtils.isEmpty(keterangan)){
+                    Toast.makeText(UpdateAct.this, "Enter Information ....", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                update();
+            }
+        });
+
+        tanggalView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Calendar calendar = Calendar.getInstance();
+                int year = calendar.get(Calendar.YEAR);
+                int month = calendar.get(Calendar.MONTH);
+                int day = calendar.get(Calendar.DAY_OF_MONTH);
+
+                DatePickerDialog dialog = new DatePickerDialog(UpdateAct.this,android.R.style.Theme_Holo_Light_Dialog_MinWidth
+                        ,setListener, year,month,day);
+                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                dialog.show();
+            }
+        });
+        setListener = new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker datePicker, int year, int month, int day) {
+                //month = month + 1;
+                //Log.d(TAG, "onDateSet: mm/dd/yyy :" + month + "/" + day + "/" + year);
+                //String date = month + "/" + day + "/" + year;
+                calendar.set(year,month,day);
+                tanggalView.setText(simpleDateFormat.format(calendar.getTime()));
+                tanggalViewDate = calendar.getTime();
+            }
+        };
+        tanggalEditDua.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Calendar cal = Calendar.getInstance();
+                int year = cal.get(Calendar.YEAR);
+                int month = cal.get(Calendar.MONTH);
+                int day = cal.get(Calendar.DAY_OF_MONTH);
+
+                DatePickerDialog dialog = new DatePickerDialog(UpdateAct.this,android.R.style.Theme_Holo_Light_Dialog_MinWidth
+                        ,setClickListener, year,month,day);
+                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                dialog.show();
+            }
+        });
+        setClickListener = new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker datePicker, int year, int month, int day) {
+                cal.set(year,month,day);
+                tanggalEditDua.setText(simpleDateFormat.format(cal.getTime()));
+                tanggalViewDateTwo = cal.getTime();
+            }
+        };
+    }
+
+    private void update(){
+        String nomor = noView.getText().toString().trim();
+        String tanggal = tanggalView.getText().toString().trim();
+        String tanggalDua = tanggalEditDua.getText().toString();
+        String tindakan = tindakanView.getText().toString().trim();
+        String keterangan = ketView.getText().toString().trim();
+        //pd.setMessage("Update");
+        //pd.show();
+
+        StringRequest request = new StringRequest(Request.Method.POST,Constant.ADD_UPDATE,response -> {
+            try {
+                JSONObject object = new JSONObject(response);
+                if (object.getBoolean("success")){
+                    JSONObject updateObject = object.getJSONObject("update");
+                    JSONObject userObject = object.getJSONObject("user");
+
+                    User user = new User();
+                    user.setId(userObject.getInt("id"));
+                    user.setUserName(userObject.getString("name"+" "+userObject.getString("lastname")));
+
+                    Update update = new Update();
+                    update.setUser(user);
+                    update.setNo(updateObject.getString("no"));
+                    update.setTanggalMaintenance(updateObject.getString("tanggalMaintenance"));
+                    update.setTanggalMaintenanceSelanjutnya(updateObject.getString("tanggalMaintenanceSelanjutnya"));
+                    update.setTindakan(updateObject.getString("tindakan"));
+                    update.setKeterangan(updateObject.getString("keterangan"));
+
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+        },error -> {
+            error.printStackTrace();
+           // pd.dismiss();
+        }){
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                String token = preferences.getString("token","");
+                HashMap<String, String> map = new HashMap<>();
+                map.put("Authorization","Bearer" +token);
+                return map;
+            }
+
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                HashMap<String, String> map = new HashMap<>();
+                map.put("no",nomor);
+                map.put("tanggalMaintenance",tanggal);
+                map.put("tanggalMaintenanceSelanjutnya",tanggalDua);
+                map.put("tindakanView",tindakan);
+                map.put("keterangan",keterangan);
+                return map;
+            }
+        };
+        RequestQueue queue = Volley.newRequestQueue(UpdateAct.this);
+        queue.add(request);
     }
 }

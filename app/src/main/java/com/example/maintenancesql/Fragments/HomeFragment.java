@@ -84,7 +84,6 @@ public class HomeFragment extends Fragment {
         refreshLayout.setRefreshing(true);
 
         StringRequest request = new StringRequest(Request.Method.GET, Constant.POSTS, response -> {
-
             try {
                 JSONObject object = new JSONObject(response);
                 if (object.getBoolean("success")){
