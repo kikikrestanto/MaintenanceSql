@@ -10,6 +10,7 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -26,6 +27,7 @@ import com.example.maintenancesql.Models.Update;
 import com.example.maintenancesql.Models.User;
 import com.example.maintenancesql.R;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -38,14 +40,15 @@ import java.util.Map;
 public class UpdateAct extends AppCompatActivity {
 
     String postId;
+    int postid;
     TextView noText,tanggalText, tindakanText, ketText, tanggalDua;
 
     EditText tanggalEditDua,noView, tanggalView,tindakanView,ketView;
 
     Button updateButton;
 
+    SharedPreferences preferences;
     ProgressDialog pd;
-    private SharedPreferences preferences;
 
     Calendar calendar = Calendar.getInstance();
     Calendar cal = Calendar.getInstance();
@@ -60,8 +63,9 @@ public class UpdateAct extends AppCompatActivity {
         setContentView(R.layout.activity_update);
 
         init();
-        Intent intent = getIntent();
-        postId = intent.getStringExtra("postId");
+        //Intent intent = getIntent();
+        //postId = intent.getStringExtra("postId");
+
     }
 
     private void init() {
@@ -77,6 +81,9 @@ public class UpdateAct extends AppCompatActivity {
 
         tanggalEditDua = findViewById(R.id.tanggalEditDua);
         tanggalDua = findViewById(R.id.tanggalDua);
+
+        pd = new ProgressDialog(this);
+        pd.setCancelable(false);
 
         updateButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -167,41 +174,47 @@ public class UpdateAct extends AppCompatActivity {
     }
 
     private void update(){
+        postid = preferences.getInt("id",0);
+        final String post_id = String.valueOf(postid);
+
         String nomor = noView.getText().toString().trim();
         String tanggal = tanggalView.getText().toString().trim();
         String tanggalDua = tanggalEditDua.getText().toString();
         String tindakan = tindakanView.getText().toString().trim();
         String keterangan = ketView.getText().toString().trim();
-        //pd.setMessage("Update");
-        //pd.show();
+        pd.setMessage("Update");
+        pd.show();
 
         StringRequest request = new StringRequest(Request.Method.POST,Constant.ADD_UPDATE,response -> {
             try {
                 JSONObject object = new JSONObject(response);
                 if (object.getBoolean("success")){
                     JSONObject updateObject = object.getJSONObject("update");
-                    JSONObject userObject = object.getJSONObject("user");
+                    JSONObject userObject = updateObject.getJSONObject("user");
 
                     User user = new User();
                     user.setId(userObject.getInt("id"));
-                    user.setUserName(userObject.getString("name"+" "+userObject.getString("lastname")));
+                    user.setUserName(userObject.getString("name")+" "+userObject.getString("lastname"));
 
                     Update update = new Update();
                     update.setUser(user);
+                    //update.setPost_id(updateObject.getString("post_id"));
                     update.setNo(updateObject.getString("no"));
                     update.setTanggalMaintenance(updateObject.getString("tanggalMaintenance"));
                     update.setTanggalMaintenanceSelanjutnya(updateObject.getString("tanggalMaintenanceSelanjutnya"));
                     update.setTindakan(updateObject.getString("tindakan"));
                     update.setKeterangan(updateObject.getString("keterangan"));
 
+                    Toast.makeText(this, "Success", Toast.LENGTH_SHORT).show();
+                    finish();
                 }
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-
+            pd.dismiss();
         },error -> {
             error.printStackTrace();
-           // pd.dismiss();
+            pd.dismiss();
         }){
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
@@ -214,10 +227,12 @@ public class UpdateAct extends AppCompatActivity {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 HashMap<String, String> map = new HashMap<>();
+                map.put("post_id",post_id);
+                Log.d("POST_ID",post_id);
                 map.put("no",nomor);
                 map.put("tanggalMaintenance",tanggal);
                 map.put("tanggalMaintenanceSelanjutnya",tanggalDua);
-                map.put("tindakanView",tindakan);
+                map.put("tindakan",tindakan);
                 map.put("keterangan",keterangan);
                 return map;
             }

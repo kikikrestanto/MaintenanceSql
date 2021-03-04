@@ -151,7 +151,7 @@ public class addPostAct extends AppCompatActivity {
 
                     User user = new User();
                     user.setId(userObject.getInt("id"));
-                    user.setUserName(userObject.getString("name"+ " "+userObject.getString("lastname")));
+                    user.setUserName(userObject.getString("name")+" "+userObject.getString("lastname"));
 
                     Post post = new Post();
                     post.setUser(user);

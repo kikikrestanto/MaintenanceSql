@@ -3,20 +3,11 @@ package com.example.maintenancesql.Models;
 public class Update {
 
     String no,tanggalMaintenance,tanggalMaintenanceSelanjutnya,tindakan,keterangan;
+    int post_id;
     User user;
     int id;
 
     public Update() {
-    }
-
-    public Update(String no, String tanggalMaintenance, String tanggalMaintenanceSelanjutnya, String tindakan, String keterangan, User user, int id) {
-        this.no = no;
-        this.tanggalMaintenance = tanggalMaintenance;
-        this.tanggalMaintenanceSelanjutnya = tanggalMaintenanceSelanjutnya;
-        this.tindakan = tindakan;
-        this.keterangan = keterangan;
-        this.user = user;
-        this.id = id;
     }
 
     public String getNo() {
@@ -73,5 +64,13 @@ public class Update {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public int getPost_id() {
+        return post_id;
+    }
+
+    public void setPost_id(int post_id) {
+        this.post_id = post_id;
     }
 }

@@ -1,12 +1,14 @@
 package com.example.maintenancesql.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -40,7 +42,7 @@ public class DetailAct extends AppCompatActivity {
 
     Context context;
     public static ArrayList<Update> updates;
-    public static RecyclerView recyclerView;
+    public static RecyclerView recycleViewDetail;
     private UpdateAdapter updateAdapter;
     int position = 0, id = 0;
     TextView nameUserDetail,nameTextViewDetail, jenisTextViewDetail,
@@ -92,7 +94,9 @@ public class DetailAct extends AppCompatActivity {
         inventarisViewDetail = findViewById(R.id.inventarisViewDetail);
         jangkaText = findViewById(R.id.jangkaText);
         moreBtnMainDetail = findViewById(R.id.moreBtnMainDetail);
-        recyclerView=findViewById(R.id.recycleViewDetail);
+
+        recycleViewDetail=findViewById(R.id.recycleViewDetail);
+
 
         position = getIntent().getIntExtra("position", 0);
         id = getIntent().getIntExtra("postId", 0);
@@ -102,12 +106,12 @@ public class DetailAct extends AppCompatActivity {
         jenisTextViewDetail.setText(getIntent().getStringExtra("jenisEdit"));
         lokasiViewDetail.setText(getIntent().getStringExtra("lokasiEdit"));
         merkViewDetail.setText(getIntent().getStringExtra("merkEdit"));
-
-
-        //adapter = new PostAdapter(this,list);
     }
 
     private void getUpdate() {
+        recycleViewDetail.setHasFixedSize(true);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getApplicationContext());
+        recycleViewDetail.setLayoutManager(linearLayoutManager);
         updates = new ArrayList<>();
 
         StringRequest request = new StringRequest(Request.Method.GET,Constant.UPDATES,response -> {
@@ -126,6 +130,7 @@ public class DetailAct extends AppCompatActivity {
                         Update update = new Update();
                         update.setId(updateObject.getInt("id"));
                         update.setUser(user);
+                       // update.setPost_id(userObject.getInt("post_id"));
                         update.setNo(updateObject.getString("no"));
                         update.setTanggalMaintenance(updateObject.getString("tanggalMaintenance"));
                         update.setTanggalMaintenanceSelanjutnya(updateObject.getString("tanggalMaintenanceSelanjutnya"));
@@ -134,8 +139,8 @@ public class DetailAct extends AppCompatActivity {
 
                         updates.add(update);
                     }
-                    updateAdapter = new UpdateAdapter(DetailAct.this,updates);
-                    recyclerView.setAdapter(updateAdapter);
+                    updateAdapter = new UpdateAdapter(getApplicationContext(),updates);
+                    recycleViewDetail.setAdapter(updateAdapter);
 
                 }
             } catch (JSONException e) {
