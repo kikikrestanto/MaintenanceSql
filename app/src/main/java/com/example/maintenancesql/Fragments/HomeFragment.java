@@ -1,6 +1,7 @@
 package com.example.maintenancesql.Fragments;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -25,6 +26,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.maintenancesql.Activities.Constant;
 import com.example.maintenancesql.Activities.HomeAct;
+import com.example.maintenancesql.Activities.addPostAct;
 import com.example.maintenancesql.Adapters.PostAdapter;
 import com.example.maintenancesql.Models.Post;
 import com.example.maintenancesql.Models.User;
@@ -100,6 +102,8 @@ public class HomeFragment extends Fragment {
                         post.setId((postObject.getInt("id")));
                         //post.setpId(postObject.getInt("id"));
                         post.setUser(user);
+                        post.setUser_id(postObject.getInt("user_id"));
+                        //post.setPost_id(postObject.getInt("post_id"));
                         post.setInventarisEdit(postObject.getString("inventarisEdit"));
                         post.setJangkaWaktu(postObject.getString("jangkaWaktu"));
                         post.setJenisEdit(postObject.getString("jenisEdit"));
@@ -141,6 +145,8 @@ public class HomeFragment extends Fragment {
     public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
         inflater.inflate(R.menu.menu_search,menu);
         MenuItem item = menu.findItem(R.id.search).setVisible(true);
+        MenuItem item1 = menu.findItem(R.id.item_add).setVisible(true);
+
         SearchView searchView = (SearchView) item.getActionView();
         //SearchView searchView  = (SearchView)item.getActionView();
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
@@ -157,5 +163,15 @@ public class HomeFragment extends Fragment {
             }
         });
         super.onCreateOptionsMenu(menu, inflater);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        //get item id
+        int id = item.getItemId();
+        if (id== R.id.item_add){
+            startActivity(new Intent(getActivity(), addPostAct.class));
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

@@ -49,22 +49,29 @@ public class DetailAct extends AppCompatActivity {
                         merkTextDetail,merkViewDetail,lokasiTextDetail,lokasiViewDetail,inventarisTextDetail,
                         inventarisViewDetail, jangkaText;
     ImageButton moreBtnMainDetail;
-    int myId;
-    String uid,postId;
+    int myId,user_id, post_id;
+    //String uid,post_id;
     SharedPreferences preferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
-
+        preferences = getApplicationContext().getSharedPreferences("user",Context.MODE_PRIVATE);
+        Log.d("MyUSER", String.valueOf(preferences));
         Intent intent = getIntent();
-        //postId =intent.getStringExtra("postId");
-        id = getIntent().getIntExtra("postId",0);
+        post_id = (int) intent.getIntExtra("post_id",0);
+        id = getIntent().getIntExtra("post_id",0);
+        Log.d("Id_post", String.valueOf(id));
+        user_id = getIntent().getIntExtra("user_id",0);
+        Log.d("USER_ID", String.valueOf(user_id));
         init();
         getUpdate();
+
         myId = preferences.getInt("id",0);
-        if(id == (myId)){
+        Log.d("USER_Id_lagi_login", String.valueOf(myId));
+        if(user_id == (myId))
+        {
             moreBtnMainDetail.setVisibility(View.VISIBLE);
         } else {
             moreBtnMainDetail.setVisibility(View.GONE);
@@ -114,9 +121,11 @@ public class DetailAct extends AppCompatActivity {
         recycleViewDetail.setLayoutManager(linearLayoutManager);
         updates = new ArrayList<>();
 
-        StringRequest request = new StringRequest(Request.Method.GET,Constant.UPDATES,response -> {
+        StringRequest request = new StringRequest(Request.Method.GET,Constant.UPDATES+ "?id=" + post_id,response -> {
+            Log.d("URL",Constant.UPDATES+"?id" +user_id);
             try {
                 JSONObject object = new JSONObject(response);
+                Log.d("RESPONSE",String.valueOf(object));
                 if (object.getBoolean("success")){
                     JSONArray array = new JSONArray(object.getString("updates"));
                     for (int i = 0; i < array.length(); i++){
@@ -131,6 +140,8 @@ public class DetailAct extends AppCompatActivity {
                         update.setId(updateObject.getInt("id"));
                         update.setUser(user);
                        // update.setPost_id(userObject.getInt("post_id"));
+                        update.setUser_id(updateObject.getInt("user_id"));
+                        update.setPost_id(updateObject.getInt("post_id"));
                         update.setNo(updateObject.getString("no"));
                         update.setTanggalMaintenance(updateObject.getString("tanggalMaintenance"));
                         update.setTanggalMaintenanceSelanjutnya(updateObject.getString("tanggalMaintenanceSelanjutnya"));
@@ -172,7 +183,7 @@ public class DetailAct extends AppCompatActivity {
                 switch (menuItem.getItemId()){
                     case R.id.item_update: {
                         Intent intent = new Intent(DetailAct.this,UpdateAct.class);
-                        intent.putExtra("postId",postId);
+                        intent.putExtra("post_id",post_id);
                         startActivity(intent);
                         return true;
                     }
@@ -181,6 +192,8 @@ public class DetailAct extends AppCompatActivity {
             }
         });
         popupMenu.show();
+
+
     }
 
     @Override

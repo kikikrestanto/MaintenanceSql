@@ -6,9 +6,6 @@
         android:id="@+id/item_home"
         app:showAsAction="always"
         android:icon="@drawable/ic_home_black_24dp"/>
-    <item android:title=""
-        android:id="@+id/title_null"
-        app:showAsAction="always"/>
 
     <item android:title=""
         android:id="@+id/item_account"

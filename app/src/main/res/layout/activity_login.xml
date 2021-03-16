@@ -18,11 +18,11 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <ImageView
+        <!--<ImageView
             android:layout_gravity="center"
             android:src="@drawable/calendardua"
             android:layout_width="match_parent"
-            android:layout_height="64dp" />
+            android:layout_height="64dp" /> -->
 
     </LinearLayout>
 

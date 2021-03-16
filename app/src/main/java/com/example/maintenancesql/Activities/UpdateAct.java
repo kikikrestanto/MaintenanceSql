@@ -39,8 +39,8 @@ import java.util.Map;
 
 public class UpdateAct extends AppCompatActivity {
 
-    String postId;
-    int postid;
+    //String postId;
+    int id=0;
     TextView noText,tanggalText, tindakanText, ketText, tanggalDua;
 
     EditText tanggalEditDua,noView, tanggalView,tindakanView,ketView;
@@ -174,8 +174,8 @@ public class UpdateAct extends AppCompatActivity {
     }
 
     private void update(){
-        postid = preferences.getInt("id",0);
-        final String post_id = String.valueOf(postid);
+        //postid = preferences.getInt("id",0);
+        //final String post_id = String.valueOf(postid);
 
         String nomor = noView.getText().toString().trim();
         String tanggal = tanggalView.getText().toString().trim();
@@ -199,6 +199,8 @@ public class UpdateAct extends AppCompatActivity {
                     Update update = new Update();
                     update.setUser(user);
                     //update.setPost_id(updateObject.getString("post_id"));
+                    update.setUser_id(updateObject.getInt("user_id"));
+                    update.setPost_id(updateObject.getInt("post_id"));
                     update.setNo(updateObject.getString("no"));
                     update.setTanggalMaintenance(updateObject.getString("tanggalMaintenance"));
                     update.setTanggalMaintenanceSelanjutnya(updateObject.getString("tanggalMaintenanceSelanjutnya"));
@@ -227,8 +229,10 @@ public class UpdateAct extends AppCompatActivity {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 HashMap<String, String> map = new HashMap<>();
-                map.put("post_id",post_id);
-                Log.d("POST_ID",post_id);
+                //map.put("post_id",post_id);
+                //Log.d("POST_ID",post_id);
+                map.put("post_id", String.valueOf(id));
+                Log.d("POST_id", String.valueOf(id));
                 map.put("no",nomor);
                 map.put("tanggalMaintenance",tanggal);
                 map.put("tanggalMaintenanceSelanjutnya",tanggalDua);
@@ -239,5 +243,11 @@ public class UpdateAct extends AppCompatActivity {
         };
         RequestQueue queue = Volley.newRequestQueue(UpdateAct.this);
         queue.add(request);
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed(); //go previous activty
+        return super.onSupportNavigateUp();
     }
 }

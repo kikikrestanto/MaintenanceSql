@@ -155,6 +155,8 @@ public class addPostAct extends AppCompatActivity {
 
                     Post post = new Post();
                     post.setUser(user);
+                    post.setUser_id(postObject.getInt("user_id"));
+//                    post.setPost_id(postObject.getInt("post_id"));
                     post.setInventarisEdit(postObject.getString("inventarisEdit"));
                     post.setJangkaWaktu(postObject.getString("jangkaWaktu"));
                     post.setJenisEdit(postObject.getString("jenisEdit"));
@@ -201,6 +203,12 @@ public class addPostAct extends AppCompatActivity {
 
         RequestQueue queue = Volley.newRequestQueue(addPostAct.this);
         queue.add(request);
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed(); //go previous activty
+        return super.onSupportNavigateUp();
     }
 
 }

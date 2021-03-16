@@ -12,7 +12,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".Activities.UpdateAct"></activity>
+        <activity android:name=".Activities.EditUserAct"></activity>
+        <activity android:name=".Activities.UpdateAct" />
         <activity android:name=".Activities.DetailAct" />
         <activity android:name=".Activities.addPostAct" />
         <activity android:name=".Fragments.AccountFragment" />

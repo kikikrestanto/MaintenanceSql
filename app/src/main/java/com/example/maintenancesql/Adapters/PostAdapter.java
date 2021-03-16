@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -87,7 +88,8 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostHolder>{
             public void onClick(View view) {
                 Intent detail = new Intent(context, DetailAct.class);
                 detail.putExtra("name",post.getUser().getUserName());
-                detail.putExtra("postId",post.getId());
+                detail.putExtra("post_id",post.getId());
+                detail.putExtra("user_id",post.getUser_id());
                 detail.putExtra("position",position);
                 detail.putExtra("inventarisEdit",post.getInventarisEdit());
                 detail.putExtra("jangkaWaktu",post.getJangkaWaktu());
@@ -127,7 +129,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostHolder>{
 
     }
 
-    private void deletePost(int postId, int position) {
+    private void deletePost(int post_id, int position) {
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
         builder.setTitle("Confirm");
         builder.setMessage("Delete Post ?");
@@ -162,7 +164,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostHolder>{
                     @Override
                     protected Map<String, String> getParams() throws AuthFailureError {
                         HashMap<String, String> map = new HashMap<>();
-                        map.put("id",postId+"");
+                        map.put("id",post_id+"");
                         return map;
                     }
                 };

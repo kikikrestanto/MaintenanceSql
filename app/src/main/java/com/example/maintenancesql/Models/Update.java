@@ -5,7 +5,7 @@ public class Update {
     String no,tanggalMaintenance,tanggalMaintenanceSelanjutnya,tindakan,keterangan;
     int post_id;
     User user;
-    int id;
+    int id,user_id;
 
     public Update() {
     }
@@ -72,5 +72,13 @@ public class Update {
 
     public void setPost_id(int post_id) {
         this.post_id = post_id;
+    }
+
+    public int getUser_id() {
+        return user_id;
+    }
+
+    public void setUser_id(int user_id) {
+        this.user_id = user_id;
     }
 }

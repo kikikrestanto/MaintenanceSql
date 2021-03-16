@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">MaintenanceSql</string>
+    <string name="app_name">Maintenance</string>
 
 
     <string-array name="nama_inventaris">

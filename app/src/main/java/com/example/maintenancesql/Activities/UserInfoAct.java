@@ -116,4 +116,10 @@ public class UserInfoAct extends AppCompatActivity {
         RequestQueue queue = Volley.newRequestQueue(UserInfoAct.this);
         queue.add(request);
     }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed(); //go previous activty
+        return super.onSupportNavigateUp();
+    }
 }

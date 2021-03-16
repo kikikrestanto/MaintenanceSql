@@ -3,9 +3,9 @@ package com.example.maintenancesql.Models;
 public class Post {
     String inventarisEdit, jangkaWaktu,jenisEdit,lokasiEdit,merkEdit,dateEdit;
     User user;
-    int id;
+    int id,user_id,post_id;
 
-    public Post(String inventarisEdit, String jangkaWaktu, String jenisEdit, String lokasiEdit, String merkEdit, User user, int id, String dateEdit) {
+    public Post(String inventarisEdit, String jangkaWaktu, String jenisEdit, String lokasiEdit, String merkEdit, User user, int id, String dateEdit,int user_id,int post_id) {
         this.inventarisEdit = inventarisEdit;
         this.jangkaWaktu = jangkaWaktu;
         this.jenisEdit = jenisEdit;
@@ -14,6 +14,8 @@ public class Post {
         this.user = user;
         this.id = id;
         this.dateEdit = dateEdit;
+        this.user_id = user_id;
+        this.post_id = post_id;
     }
 
     public Post() {
@@ -81,5 +83,21 @@ public class Post {
 
     public void setDateEdit(String dateEdit) {
         this.dateEdit = dateEdit;
+    }
+
+    public int getUser_id() {
+        return user_id;
+    }
+
+    public void setUser_id(int user_id) {
+        this.user_id = user_id;
+    }
+
+    public int getPost_id() {
+        return post_id;
+    }
+
+    public void setPost_id(int post_id) {
+        this.post_id = post_id;
     }
 }
