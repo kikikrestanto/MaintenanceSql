@@ -91,7 +91,7 @@
 
             <TextView
                 android:id="@+id/inventarisText"
-                android:text="No inventaris : "
+                android:text="No inventaris / Plat Mobil : "
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 
@@ -132,58 +132,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
-            <RadioGroup
-                android:id="@+id/radioGrup"
-                android:orientation="horizontal"
-                android:layout_width="wrap_content"
+            <Spinner
+                android:id="@+id/jangkaWaktu"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                tools:ignore="OnClick">
+                android:entries="@array/waktuEdit"
+                android:padding="15dp"
+                ></Spinner>
 
-                <RadioButton
-                    android:id="@+id/satuMinggu"
-                    android:text="1 Minggu"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
-
-                <RadioButton
-                    android:id="@+id/duaMinggu"
-                    android:text="2 Minggu"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
-
-                <RadioButton
-                    android:id="@+id/satuBulan"
-                    android:text="1 Bulan"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
-
-            </RadioGroup>
-            <RadioGroup
-                android:id="@+id/radioGrupp"
-                android:orientation="horizontal"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-
-                <RadioButton
-                    android:id="@+id/tigaBulan"
-                    android:text="3 Bulan"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
-
-                <RadioButton
-                    android:layout_marginLeft="11dp"
-                    android:id="@+id/enamBulan"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="6 Bulan" />
-                <RadioButton
-                    android:id="@+id/satuTahun"
-                    android:layout_marginLeft="13dp"
-                    android:text="12 Bulan"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
-
-            </RadioGroup>
 
 
             <!--<TextView

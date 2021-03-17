@@ -3,6 +3,7 @@ package com.example.maintenancesql.Activities;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.content.Context;
 import android.content.Intent;
@@ -43,6 +44,7 @@ public class DetailAct extends AppCompatActivity {
     Context context;
     public static ArrayList<Update> updates;
     public static RecyclerView recycleViewDetail;
+    SwipeRefreshLayout refreshLayout;
     private UpdateAdapter updateAdapter;
     int position = 0, id = 0;
     TextView nameUserDetail,nameTextViewDetail, jenisTextViewDetail,
@@ -91,6 +93,7 @@ public class DetailAct extends AppCompatActivity {
 
     public void init() {
         preferences = getApplicationContext().getSharedPreferences("user", Context.MODE_PRIVATE);
+        refreshLayout = findViewById(R.id.swipeDetail);
         nameUserDetail = findViewById(R.id.nameUserDetail);
         nameTextViewDetail = findViewById(R.id.nameTextViewDetail);
         jenisTextViewDetail = findViewById(R.id.jenisTextViewDetail);
@@ -113,16 +116,24 @@ public class DetailAct extends AppCompatActivity {
         jenisTextViewDetail.setText(getIntent().getStringExtra("jenisEdit"));
         lokasiViewDetail.setText(getIntent().getStringExtra("lokasiEdit"));
         merkViewDetail.setText(getIntent().getStringExtra("merkEdit"));
+
+        refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                getUpdate();
+            }
+        });
     }
 
     private void getUpdate() {
+        refreshLayout.setRefreshing(true);
         recycleViewDetail.setHasFixedSize(true);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getApplicationContext());
         recycleViewDetail.setLayoutManager(linearLayoutManager);
         updates = new ArrayList<>();
 
         StringRequest request = new StringRequest(Request.Method.GET,Constant.UPDATES+ "?id=" + post_id,response -> {
-            Log.d("URL",Constant.UPDATES+"?id" +user_id);
+            Log.d("URL",Constant.UPDATES+"?id" +post_id);
             try {
                 JSONObject object = new JSONObject(response);
                 Log.d("RESPONSE",String.valueOf(object));
@@ -157,8 +168,10 @@ public class DetailAct extends AppCompatActivity {
             } catch (JSONException e) {
                 e.printStackTrace();
             }
+            refreshLayout.setRefreshing(false);
         },error -> {
             error.printStackTrace();
+            refreshLayout.setRefreshing(false);
         }){
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {

@@ -39,7 +39,7 @@ import java.util.Map;
 
 public class UpdateAct extends AppCompatActivity {
 
-    //String postId;
+    int post_id;
     int id=0;
     TextView noText,tanggalText, tindakanText, ketText, tanggalDua;
 
@@ -63,8 +63,8 @@ public class UpdateAct extends AppCompatActivity {
         setContentView(R.layout.activity_update);
 
         init();
-        //Intent intent = getIntent();
-        //postId = intent.getStringExtra("postId");
+        Intent intent = getIntent();
+        post_id = intent.getIntExtra("post_id",0);
 
     }
 
@@ -82,8 +82,11 @@ public class UpdateAct extends AppCompatActivity {
         tanggalEditDua = findViewById(R.id.tanggalEditDua);
         tanggalDua = findViewById(R.id.tanggalDua);
 
+        id = getIntent().getIntExtra("post_id",0);
+
         pd = new ProgressDialog(this);
         pd.setCancelable(false);
+
 
         updateButton.setOnClickListener(new View.OnClickListener() {
             @Override

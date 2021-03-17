@@ -4,9 +4,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -32,13 +34,14 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class addPostAct extends AppCompatActivity {
+    int post_id;
+    int id=0;
 
     private EditText merkEdit, lokasiEdit, inventarisEdit;
     private Button uploadM;
-    private Spinner jenisEdit;
+    Spinner jenisEdit,jangkaWaktu;
     private RadioGroup radioGroup;
     private RadioButton satuBulan, tigaBulan, enamBulan, satuTahun, satuMinggu,duaMinggu;
-    String jangkaWaktu="";
     String setNamaInventaris;
     private ProgressDialog dialog;
     private SharedPreferences preferences;
@@ -49,22 +52,20 @@ public class addPostAct extends AppCompatActivity {
         setContentView(R.layout.activity_add_post);
 
         init();
+        Intent intent = getIntent();
+        post_id = intent.getIntExtra("id",0);
     }
 
     private void init() {
         preferences = getApplicationContext().getSharedPreferences("user", Context.MODE_PRIVATE);
         jenisEdit = findViewById(R.id.jenisEdit);
+        jangkaWaktu = findViewById(R.id.jangkaWaktu);
         merkEdit = findViewById(R.id.merkEdit);
         lokasiEdit = findViewById(R.id.lokasiEdit);
         inventarisEdit = findViewById(R.id.inventarisEdit);
         uploadM = findViewById(R.id.uploadM);
-        radioGroup = findViewById(R.id.radioGrup);
-        satuMinggu = findViewById(R.id.satuMinggu);
-        duaMinggu = findViewById(R.id.duaMinggu);
-        satuBulan = findViewById(R.id.satuBulan);
-        tigaBulan = findViewById(R.id.tigaBulan);
-        enamBulan = findViewById(R.id.enamBulan);
-        satuTahun = findViewById(R.id.satuTahun);
+
+        id = getIntent().getIntExtra("id",0);
 
         dialog = new ProgressDialog(this);
         dialog.setCancelable(false);
@@ -93,7 +94,7 @@ public class addPostAct extends AppCompatActivity {
             if (TextUtils.isEmpty(inventaris)){
                 Toast.makeText(addPostAct.this, "Enter Inventory.... ", Toast.LENGTH_SHORT).show();
                 return;
-            }
+            }/*
             if (satuMinggu.isChecked()){
                 jangkaWaktu = satuMinggu.getText().toString();
             } if (duaMinggu.isChecked()){
@@ -107,7 +108,10 @@ public class addPostAct extends AppCompatActivity {
                 jangkaWaktu = enamBulan.getText().toString();
             } if (satuTahun.isChecked()){
                 jangkaWaktu = satuTahun.getText().toString();
-            }
+            } */
+            Intent intent = new Intent(addPostAct.this,HomeFragment.class);
+            intent.putExtra("id",post_id);
+            startActivity(intent);
             post();
         });
     }
@@ -164,6 +168,7 @@ public class addPostAct extends AppCompatActivity {
                     post.setMerkEdit(postObject.getString("merkEdit"));
                     post.setDateEdit(postObject.getString("created_at"));
 
+
                     HomeFragment.arrayList.add(0,post);
                     HomeFragment.recyclerView.getAdapter().notifyItemInserted(0);
                     HomeFragment.recyclerView.getAdapter().notifyDataSetChanged();
@@ -191,8 +196,10 @@ public class addPostAct extends AppCompatActivity {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 HashMap<String, String> map = new HashMap<>();
+                //map.put("id", String.valueOf(post_id));
+                //Log.d("POST_id", String.valueOf(post_id));
                 map.put("inventarisEdit",inventarisEdit.getText().toString().trim());
-                map.put("jangkaWaktu",jangkaWaktu);
+                map.put("jangkaWaktu",jangkaWaktu.getSelectedItem().toString().trim());
                 map.put("jenisEdit",jenisEdit.getSelectedItem().toString().trim());
                 map.put("lokasiEdit",lokasiEdit.getText().toString().trim());
                 map.put("merkEdit",merkEdit.getText().toString().trim());

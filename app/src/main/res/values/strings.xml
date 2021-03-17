@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Maintenance</string>
+    <string name="app_name">Support Tools</string>
 
 
     <string-array name="nama_inventaris">
@@ -15,6 +15,15 @@
         <item>Pembersihan Saluran Air</item>
         <item>Buffing Lantai</item>
 
+    </string-array>
+
+    <string-array name="waktuEdit">
+        <item>1 Minggu</item>
+        <item>2 Minggu</item>
+        <item>1 Bulan</item>
+        <item>3 Bulan</item>
+        <item>6 Bulan</item>
+        <item>12 Bulan</item>
     </string-array>
 </resources>
 

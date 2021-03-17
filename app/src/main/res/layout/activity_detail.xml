@@ -237,14 +237,21 @@
 
         </LinearLayout>
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recycleViewDetail"
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:id="@+id/swipeDetail"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignTop="@+id/linearTable"
-            android:layout_marginTop="55dp">
-        </androidx.recyclerview.widget.RecyclerView>
+            android:layout_height="match_parent"
+            android:layout_marginTop="55dp"
+            >
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycleViewDetail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@+id/linearTable"
+                android:layout_marginTop="55dp">
+            </androidx.recyclerview.widget.RecyclerView>
 
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
     </RelativeLayout>
 
 </RelativeLayout>

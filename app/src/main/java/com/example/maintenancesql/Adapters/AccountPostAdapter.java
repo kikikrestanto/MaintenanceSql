@@ -3,6 +3,7 @@ package com.example.maintenancesql.Adapters;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -23,6 +24,7 @@ import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.maintenancesql.Activities.Constant;
+import com.example.maintenancesql.Activities.DetailAct;
 import com.example.maintenancesql.Models.Post;
 import com.example.maintenancesql.R;
 
@@ -65,6 +67,24 @@ public class AccountPostAdapter extends RecyclerView.Adapter<AccountPostAdapter.
         holder.lokasiViewAccount.setText(post.getLokasiEdit());
         holder.inventarisViewAccount.setText(post.getInventarisEdit());
         holder.jangkaViewAccount.setText(post.getJangkaWaktu());
+
+        holder.linearPost.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent detail = new Intent(context, DetailAct.class);
+                detail.putExtra("name",post.getUser().getUserName());
+                detail.putExtra("post_id",post.getId());
+                detail.putExtra("user_id",post.getUser_id());
+                detail.putExtra("position",position);
+                detail.putExtra("inventarisEdit",post.getInventarisEdit());
+                detail.putExtra("jangkaWaktu",post.getJangkaWaktu());
+                detail.putExtra("jenisEdit",post.getJenisEdit());
+                detail.putExtra("lokasiEdit",post.getLokasiEdit());
+                detail.putExtra("merkEdit",post.getMerkEdit());
+                detail.putExtra("dateEdit",post.getDateEdit());
+                context.startActivity(detail);
+            }
+        });
 
         if (post.getUser().getId()==preferences.getInt("id",0)){
             holder.moreBtnMainAccount.setVisibility(View.VISIBLE);

@@ -23,7 +23,7 @@
             android:layout_marginTop="120dp"
             android:layout_marginStart="20dp"
             android:fontFamily="@font/nunito_bold"
-            android:textColor="@color/black"
+            android:textColor="@color/white"
             android:textSize="25dp"
             android:text="Edit Profile"
             android:layout_width="130dp"

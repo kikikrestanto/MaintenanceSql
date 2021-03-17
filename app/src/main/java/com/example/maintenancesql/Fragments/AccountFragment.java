@@ -97,6 +97,7 @@ public class AccountFragment extends Fragment {
                         Post post = new Post();
                         post.setId(postObject.getInt("id"));
                         post.setUser(user);
+                        post.setUser_id(postObject.getInt("user_id"));
                         post.setInventarisEdit(postObject.getString("inventarisEdit"));
                         post.setJangkaWaktu(postObject.getString("jangkaWaktu"));
                         post.setJenisEdit(postObject.getString("jenisEdit"));

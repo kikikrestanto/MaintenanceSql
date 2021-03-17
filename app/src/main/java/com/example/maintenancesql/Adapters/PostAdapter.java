@@ -71,6 +71,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostHolder>{
     public PostHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_post,parent,false);
         return new PostHolder(view);
+        
     }
 
     @Override
@@ -82,6 +83,8 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostHolder>{
         holder.lokasiView.setText(post.getLokasiEdit());
         holder.inventarisView.setText(post.getInventarisEdit());
         holder.jangkaView.setText(post.getJangkaWaktu());
+
+
 
         holder.linearPost.setOnClickListener(new View.OnClickListener() {
             @Override
